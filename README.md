@@ -37,3 +37,30 @@ The core logic is based on the following linear regression models:
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/your-user/fitmetric.git](https://github.com/your-user/fitmetric.git)
+    ```
+
+2. **Navigate to the project directory:**
+   ```bash
+   cd fitmetric
+    ```
+
+3. **Install dependencies:**
+   ```bash
+   npm install
+    ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+    ```
+
+5. **Access the application:**
+   Open your web browser and navigate to `http://localhost:5173` to access the application.
+
+## 📊 Data Persistence
+
+User data is stored locally using the browser's `localStorage` to ensure that progress is not lost on refresh or page reload.
+
+## Support
+
+For support or questions, please open an issue on the [GitHub repository](https://github.com/your-user/fitmetric/issues).

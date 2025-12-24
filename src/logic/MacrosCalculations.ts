@@ -28,7 +28,7 @@ export const macrosRatios: Record<PurposeType, Record<MacronutrientType, number>
     }
 }
 
-export interface MacronutrientBreakdown {
+export type MacronutrientBreakdown = {
     protein: number;
     carbohydrate: number;
     fat: number;

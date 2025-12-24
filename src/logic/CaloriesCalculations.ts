@@ -1,9 +1,9 @@
 /*
  * Basal Metabolic Rate
  */
-import type { Gender, ActivityFactor, GoalType } from "../types"
+import type { GenderType, ActivityFactorType, GoalType } from "../types"
 
-const activityLevel: Record<ActivityFactor, number> = {
+const activityLevel: Record<ActivityFactorType, number> = {
     "Sedentary": 1.2,
     "Light": 1.375,
     "Moderate": 1.55,
@@ -11,12 +11,12 @@ const activityLevel: Record<ActivityFactor, number> = {
     "Extreme": 1.9
 }
 
-const genderFactor: Record<Gender, number> = {
+const genderFactor: Record<GenderType, number> = {
     "Male": 5,
     "Female": -161
 }
 
-export function calculateBMR(weight: number, height: number, age: number, sex: Gender): number {
+export function calculateBMR(weight: number, height: number, age: number, sex: GenderType): number {
     /**
      * Calculate Basal Metabolic Rate (BMR) using the Mifflin-St Jeor equation
      * Props:
@@ -32,7 +32,7 @@ export function calculateBMR(weight: number, height: number, age: number, sex: G
 }
 
 //  Total Daily Energy Expenditure
-export function calculateTDEE(BMR: number, activityFactor: ActivityFactor): number {
+export function calculateTDEE(BMR: number, activityFactor: ActivityFactorType): number {
     /**
      * Calculate Total Daily Energy Expenditure (TDEE)
      * Props:

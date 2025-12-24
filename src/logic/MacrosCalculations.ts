@@ -1,4 +1,4 @@
-import type { MacronutrientType, PurpouseType } from "../types"
+import type { MacronutrientType, PurposeType } from "../types"
 
 export const macrosValues: Record<MacronutrientType, number> = {
     "Protein": 4,
@@ -10,7 +10,7 @@ export const macrosValues: Record<MacronutrientType, number> = {
 // 40% carbs, 40% fat, 20% protein for maintaining
 // 30% carbs, 40% fat, 30% protein for cutting
 
-export const macrosRatios: Record<PurpouseType, Record<MacronutrientType, number>> = {
+export const macrosRatios: Record<PurposeType, Record<MacronutrientType, number>> = {
     "Bulk": {
         "Protein": 0.2,
         "Carbohydrate": 0.5,
@@ -34,7 +34,7 @@ export interface MacronutrientBreakdown {
     fat: number;
 }
 
-export function calculateMacrosInGrams(calories: number, purpouse: PurpouseType): MacronutrientBreakdown {
+export function calculateMacrosInGrams(calories: number, purpouse: PurposeType): MacronutrientBreakdown {
     /**
      * Calculate the needed macros in grams based on the calories and the purpouse
      * Props:

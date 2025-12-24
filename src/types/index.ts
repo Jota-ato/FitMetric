@@ -1,5 +1,5 @@
-export type Gender = "Male" | "Female"
-export type ActivityFactor = "Sedentary" | "Light" | "Moderate" | "Very" | "Extreme"
+export type GenderType = "Male" | "Female"
+export type ActivityFactorType = "Sedentary" | "Light" | "Moderate" | "Very" | "Extreme"
 export type GoalType = "Lose Weight" | "Maintain Weight" | "Gain Weight"
 export type MacronutrientType = "Protein" | "Carbohydrate" | "Fat"
-export type PurpouseType = "Bulk" | "Maintain" | "Cut"
+export type PurposeType = "Bulk" | "Maintain" | "Cut"

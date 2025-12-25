@@ -1,53 +1,56 @@
+
+import type { RegistrationInputType } from "../types"
+import InputContainter from "./InputContainter"
+
 export default function RegistationForm() {
+
+    const RegistrationFormInputs: Record<string, RegistrationInputType> = {
+        name: {
+            label: "Nombre",
+            name: "name",
+            placeholder: "Nombre"
+        },
+        age: {
+            label: "Edad",
+            name: "age",
+            placeholder: "Edad",
+            type: "number"
+        },
+        weight: {
+            label: "Peso",
+            name: "weight",
+            placeholder: "Peso",
+            type: "number"
+        },
+        height: {
+            label: "Altura",
+            name: "height",
+            placeholder: "Altura",
+            type: "number"
+        },
+        gender: {
+            label: "Género",
+            name: "gender",
+            placeholder: "Género"
+        }
+    }
+    const genderOptions = ["Male", "Female"]
 
     return (
         <section className="flex justify-center items-center h-screen w-screen">
-            <form className="bg-surface p-8 rounded-xl">
+            <form className="bg-surface p-16 rounded-xl w-[90%] max-w-400">
                 <fieldset className="space-y-4">
                     <legend className="text-4xl font-bold">Información Personal</legend>
 
-                    <div className="space-y-4">
-                        <label htmlFor="name" className="block text-2xl font-semibold">Nombre</label>
-                        <input
-                            id="name"
-                            name="name"
-                            placeholder="Nombre"
-                            className="text-2xl block border-b border-text-main focus:outline-none bg-transparent w-full"
+                    {Object.entries(RegistrationFormInputs).map(([key, value]) => (
+                        <InputContainter
+                            key={key}
+                            label={value.label}
+                            name={value.name}
+                            placeholder={value.placeholder}
+                            type={value.type}
                         />
-                    </div>
-
-                    <div className="space-y-4">
-                        <label htmlFor="age" className="block text-2xl font-semibold">Edad</label>
-                        <input
-                            id="age"
-                            name="age"
-                            type="number"
-                            placeholder="Edad (años)"
-                            className="text-2xl block border-b border-text-main focus:outline-none bg-transparent w-full"
-                        />
-                    </div>
-
-                    <div className="space-y-4">
-                        <label htmlFor="weight" className="block text-2xl font-semibold">Peso</label>
-                        <input
-                            id="weight"
-                            name="weight"
-                            type="number"
-                            placeholder="Peso (kg)"
-                            className="text-2xl block border-b border-text-main focus:outline-none bg-transparent w-full"
-                        />
-                    </div>
-
-                    <div className="space-y-4">
-                        <label htmlFor="height" className="block text-2xl font-semibold">Altura</label>
-                        <input
-                            id="height"
-                            name="height"
-                            type="number"
-                            placeholder="Altura (cm)"
-                            className="text-2xl block border-b border-text-main focus:outline-none bg-transparent w-full"
-                        />
-                    </div>
+                    ))}
 
                     <div className="space-y-4">
                         <label htmlFor="gender" className="block text-2xl font-semibold">Género</label>
@@ -56,8 +59,10 @@ export default function RegistationForm() {
                             name="gender"
                             className="text-2xl block border-b border-text-main focus:outline-none bg-transparent w-full focus:bg-bg"
                         >
-                            <option value="Male">Masculino</option>
-                            <option value="Female">Femenino</option>
+                            <option value="_" disabled selected>Selecciona tu género</option>
+                            {genderOptions.map((option) => (
+                                <option key={option} value={option}>{option}</option>
+                            ))}
                         </select>
                     </div>
 

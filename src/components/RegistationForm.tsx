@@ -3,6 +3,10 @@ import type { RegistrationInputType } from "../types"
 import InputContainter from "./InputContainter"
 
 export default function RegistationForm() {
+    /**
+     * @type {Record<string, RegistrationInputType>}
+     * Basic information for the user
+     */
 
     const RegistrationFormInputs: Record<string, RegistrationInputType> = {
         name: {
@@ -38,7 +42,7 @@ export default function RegistationForm() {
 
     return (
         <section className="flex justify-center items-center h-screen w-screen">
-            <form className="bg-surface p-16 rounded-xl w-[90%] max-w-400">
+            <form className="bg-surface p-16 rounded-xl w-[90%] max-w-400 shadow-card">
                 <fieldset className="space-y-4">
                     <legend className="text-4xl font-bold">Información Personal</legend>
 
@@ -69,7 +73,7 @@ export default function RegistationForm() {
                     <div className="pt-4">
                         <button
                             type="submit"
-                            className="text-2xl font-semibold bg-primary text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity w-full"
+                            className="text-2xl font-semibold bg-primary text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity w-full cursor-pointer"
                         >
                             Continuar
                         </button>

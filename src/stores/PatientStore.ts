@@ -41,7 +41,7 @@ export const usePatientStore = create<PatientState>()(
             sex: "Male",
             activityFactor: "Sedentary",
             goal: "Maintain Weight",
-            purpose: "Bulk",
+            purpose: "Gain Muscle",
             macros: {
                 protein: 0,
                 carbohydrate: 0,

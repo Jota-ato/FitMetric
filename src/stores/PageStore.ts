@@ -14,7 +14,7 @@ interface BasicInfo {
 export type PageStoreType = {
     isBasicInfoFull: boolean
     step: number
-    setBasicInfo: (basicInfo: BasicInfo) => void
+    setIsFullBasicInfo: (basicInfo: BasicInfo) => void
     setStep: (step: number) => void
 }
 
@@ -23,7 +23,7 @@ export const usePageStore = create<PageStoreType>()(
         (set) => ({
             isBasicInfoFull: false,
             step: 1,
-            setBasicInfo: (basicInfo: BasicInfo) => {
+            setIsFullBasicInfo: (basicInfo: BasicInfo) => {
                 const isFull = Object.values(basicInfo).every(value => value !== null && value !== "" && value > 0)
                 set({ isBasicInfoFull: isFull })
             },

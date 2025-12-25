@@ -1,23 +1,19 @@
 // src/components/RegistationForm.tsx
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { usePatientStore } from "../stores/PatientStore"
-import type { GenderType } from "../types"
+import type { GenderType, RegistrationFields } from "../types"
 import InputContainter from "./InputContainter"
 import CenterContainer from "./CenterContainer"
 import FormContainer from "./FormContainer"
 import { usePageStore } from "../stores/PageStore"
 
-interface RegistrationFields {
-    name: string
-    age: number
-    weight: number
-    height: number
-    sex: GenderType
-}
+
 
 export default function RegistationForm() {
     const setPatientData = usePatientStore(state => state.setPatientData)
+    const { name, weight, height, age, sex } = usePatientStore()
     const setStep = usePageStore(state => state.setStep)
+    const setIsFullBasicInfo = usePageStore(state => state.setIsFullBasicInfo)
 
     // 1. Añadimos defaultValues para que el select no inicie en un estado inválido "selected"
     const { register, handleSubmit, formState: { errors } } = useForm<RegistrationFields>({
@@ -29,7 +25,10 @@ export default function RegistationForm() {
     const onSubmit: SubmitHandler<RegistrationFields> = (data) => {
         // Al usar valueAsNumber en el register, data ya trae números
         setPatientData(data)
-        setStep(2)
+        if (name && weight > 0 && height > 0 && age > 0 && sex) {
+            setIsFullBasicInfo({ name, weight, height, age, sex })
+            setStep(2)
+        }
     }
 
     return (
@@ -37,7 +36,7 @@ export default function RegistationForm() {
             <FormContainer>
                 {/* 2. Simplificamos la llamada a handleSubmit */}
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <fieldset className="space-y-4">
+                    <fieldset className="space-y-8">
                         <legend className="text-4xl font-bold">Información Personal</legend>
 
                         <InputContainter

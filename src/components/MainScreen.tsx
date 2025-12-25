@@ -8,7 +8,7 @@ export default function MainScreen() {
 
     return (
         <CenterContainer>
-            <div className="flex flex-col items-center gap-6 animate-fade-in">
+            <div className="flex flex-col items-center gap-6 animate-fade-in bg-surface">
                 {/* Logo */}
                 <div className="relative group">
                     <img
@@ -24,7 +24,7 @@ export default function MainScreen() {
                 </h1>
 
                 {/* Tagline */}
-                <p className="text-2xl text-gray-400 dark:text-gray-500 font-light tracking-wide">
+                <p className="text-2xl text-muted font-light tracking-wide">
                     Track. Measure. Transform.
                 </p>
             </div>

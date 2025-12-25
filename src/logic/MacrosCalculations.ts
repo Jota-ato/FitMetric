@@ -11,17 +11,17 @@ export const macrosValues: Record<MacronutrientType, number> = {
 // 30% carbs, 40% fat, 30% protein for cutting
 
 export const macrosRatios: Record<PurposeType, Record<MacronutrientType, number>> = {
-    "Bulk": {
+    "Gain Muscle": {
         "Protein": 0.2,
         "Carbohydrate": 0.5,
         "Fat": 0.3
     },
-    "Maintain": {
+    "Maintain Muscle": {
         "Protein": 0.2,
         "Carbohydrate": 0.4,
         "Fat": 0.4
     },
-    "Cut": {
+    "Lose Fat": {
         "Protein": 0.3,
         "Carbohydrate": 0.3,
         "Fat": 0.4
@@ -44,8 +44,8 @@ export function calculateMacrosInGrams(calories: number, purpouse: PurposeType):
      * @returns Object with the macros in grams
      */
     return {
-        protein: macrosRatios[purpouse]["Protein"] * calories / macrosValues["Protein"],
-        carbohydrate: macrosRatios[purpouse]["Carbohydrate"] * calories / macrosValues["Carbohydrate"],
-        fat: macrosRatios[purpouse]["Fat"] * calories / macrosValues["Fat"]
+        protein: Math.round(macrosRatios[purpouse]["Protein"] * calories / macrosValues["Protein"]),
+        carbohydrate: Math.round(macrosRatios[purpouse]["Carbohydrate"] * calories / macrosValues["Carbohydrate"]),
+        fat: Math.round(macrosRatios[purpouse]["Fat"] * calories / macrosValues["Fat"]),
     }
 }

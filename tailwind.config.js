@@ -7,7 +7,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: 'var(--color-bg)',
+                background: 'var(--color-background)',
                 surface: 'var(--color-surface)',
                 main: 'var(--color-text-main)',
                 muted: 'var(--color-text-muted)',

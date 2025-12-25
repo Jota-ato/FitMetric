@@ -1,25 +1,34 @@
 @import "tailwindcss";
 
-:root {
-    /* Light mode */
-    --color-bg: #ffffff;
-    --color-surface: #f8fafc;
-    --color-text-main: #0f172a;
-    --color-text-muted: #64748b;
-    --color-primary: #3b82f6;
+@theme {
+    /* Mapping: Esto crea las clases bg-background, text-main, etc. */
+    --color-bg: var(--bg);
+    --color-surface: var(--surface);
+    --color-text-main: var(--text-main);
+    --color-text-muted: var(--text-muted);
+    --color-primary: var(--primary);
 }
 
+/* Valores por defecto (Light Mode) */
+:root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary: #3b82f6;
+}
+
+/* Sobrescritura para Dark Mode */
 .dark {
-    /* Dark mode */
-    --color-bg: #0f172a;
-    --color-surface: #1e293b;
-    --color-text-main: #f1f5f9;
-    --color-text-muted: #94a3b8;
-    --color-primary: #60a5fa;
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --primary: #60a5fa;
 }
 
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text-main);
+    background-color: var(--bg);
+    color: var(--text-main);
     transition: background-color 0.3s, color 0.3s;
 }

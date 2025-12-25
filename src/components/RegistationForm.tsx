@@ -1,84 +1,110 @@
-
-import type { RegistrationInputType } from "../types"
+// src/components/RegistationForm.tsx
+import { useForm, type SubmitHandler } from "react-hook-form"
+import { usePatientStore } from "../stores/PatientStore"
+import type { GenderType } from "../types"
 import InputContainter from "./InputContainter"
 import CenterContainer from "./CenterContainer"
 import FormContainer from "./FormContainer"
+import { usePageStore } from "../stores/PageStore"
+
+interface RegistrationFields {
+    name: string
+    age: number
+    weight: number
+    height: number
+    sex: GenderType
+}
 
 export default function RegistationForm() {
-    /**
-     * @type {Record<string, RegistrationInputType>}
-     * Basic information for the user
-     */
+    const setPatientData = usePatientStore(state => state.setPatientData)
+    const setStep = usePageStore(state => state.setStep)
 
-    const RegistrationFormInputs: Record<string, RegistrationInputType> = {
-        name: {
-            label: "Nombre",
-            name: "name",
-            placeholder: "Nombre"
-        },
-        age: {
-            label: "Edad",
-            name: "age",
-            placeholder: "Edad",
-            type: "number"
-        },
-        weight: {
-            label: "Peso",
-            name: "weight",
-            placeholder: "Peso",
-            type: "number"
-        },
-        height: {
-            label: "Altura",
-            name: "height",
-            placeholder: "Altura",
-            type: "number"
+    // 1. Añadimos defaultValues para que el select no inicie en un estado inválido "selected"
+    const { register, handleSubmit, formState: { errors } } = useForm<RegistrationFields>({
+        defaultValues: {
+            sex: "" as GenderType // Iniciamos vacío para forzar la validación
         }
+    })
+
+    const onSubmit: SubmitHandler<RegistrationFields> = (data) => {
+        // Al usar valueAsNumber en el register, data ya trae números
+        setPatientData(data)
+        setStep(2)
     }
-    const genderOptions = ["Male", "Female"]
 
     return (
         <CenterContainer>
             <FormContainer>
-                <form>
+                {/* 2. Simplificamos la llamada a handleSubmit */}
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <fieldset className="space-y-4">
                         <legend className="text-4xl font-bold">Información Personal</legend>
 
-                        {Object.entries(RegistrationFormInputs).map(([key, value]) => (
-                            <InputContainter
-                                key={key}
-                                label={value.label}
-                                name={value.name}
-                                placeholder={value.placeholder}
-                                type={value.type}
-                            />
-                        ))}
+                        <InputContainter
+                            label="Nombre"
+                            placeholder="Tu nombre"
+                            error={errors.name?.message}
+                            {...register("name", { required: "El nombre es obligatorio" })}
+                        />
+
+                        <InputContainter
+                            label="Peso (kg)"
+                            type="number"
+                            placeholder="70"
+                            error={errors.weight?.message}
+                            {...register("weight", {
+                                required: "Indica tu peso",
+                                min: { value: 20, message: "Mínimo 20kg" },
+                                valueAsNumber: true
+                            })}
+                        />
+
+                        <InputContainter
+                            label="Altura (cm)"
+                            type="number"
+                            placeholder="180"
+                            error={errors.height?.message}
+                            {...register("height", {
+                                required: "Indica tu altura",
+                                min: { value: 100, message: "Mínimo 100cm" },
+                                valueAsNumber: true
+                            })}
+                        />
+
+                        <InputContainter
+                            label="Edad"
+                            type="number"
+                            placeholder="25"
+                            error={errors.age?.message}
+                            {...register("age", {
+                                required: "Indica tu edad",
+                                min: { value: 12, message: "Debes ser mayor de 12 años" },
+                                valueAsNumber: true
+                            })}
+                        />
 
                         <div className="space-y-4">
-                            <label htmlFor="gender" className="block text-2xl font-semibold">Género</label>
+                            <label htmlFor="sex" className="block text-2xl font-semibold">Género</label>
                             <select
-                                id="gender"
-                                name="gender"
-                                className="text-2xl block border-b border-text-main focus:outline-none bg-transparent w-full focus:bg-bg"
+                                id="sex"
+                                className={`text-2xl block border-b focus:outline-none w-full focus:bg-surface ${errors.sex ? "border-red-500" : "border-text-main"
+                                    }`}
+                                {...register("sex", { required: "Selecciona un género" })}
                             >
-                                <option value="_" disabled selected>Selecciona tu género</option>
-                                {genderOptions.map((option) => (
-                                    <option key={option} value={option}>{option}</option>
-                                ))}
+                                <option value="" defaultValue={"Selecciona tu género"} disabled>Selecciona tu género</option>
+                                <option value="Male">Masculino</option>
+                                <option value="Female">Femenino</option>
                             </select>
+                            {/* 4. IMPORTANTE: Mostrar error del select */}
+                            {errors.sex && <p className="text-red-500 text-xl mt-1">{errors.sex.message}</p>}
                         </div>
 
-                        <div className="pt-4">
-                            <button
-                                type="submit"
-                                className="text-2xl font-semibold bg-primary text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity w-full cursor-pointer"
-                            >
-                                Continuar
-                            </button>
-                        </div>
+                        <button type="submit" className="bg-primary text-main font-bold text-2xl p-4 w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                            Continuar
+                        </button>
                     </fieldset>
                 </form>
             </FormContainer>
-        </CenterContainer>
+        </CenterContainer >
     )
 }

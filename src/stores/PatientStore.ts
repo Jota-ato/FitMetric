@@ -61,6 +61,7 @@ export const usePatientStore = create<PatientState>()(
                 const newState = { ...get(), ...data }
                 const { BMR, TDEE, caloriesNeeded } = get().calculateCalories(newState)
                 const macros = get().calculateMacros(caloriesNeeded, newState.purpose)
+                console.log({ ...data, BMR, TDEE, caloriesNeeded, macros })
                 set({ ...data, BMR, TDEE, caloriesNeeded, macros })
             },
             calculateCalories: (stats) => {

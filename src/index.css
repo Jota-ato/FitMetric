@@ -27,6 +27,11 @@
     --primary: #60a5fa;
 }
 
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
+
 body {
     background-color: var(--bg);
     color: var(--text-main);

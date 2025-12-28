@@ -1,5 +1,5 @@
 import { usePatientStore } from "../../stores/PatientStore"
-import { Outlet } from "react-router"
+import { Outlet, useNavigate } from "react-router"
 import CaloriesCard from "./CaloriesCard"
 import DataCard from "./DataCard"
 
@@ -15,6 +15,7 @@ export default function MeComponent() {
     const caloriesNeeded = usePatientStore(state => state.caloriesNeeded)
     const goal = usePatientStore(state => state.goal)
     const purpose = usePatientStore(state => state.purpose)
+    const navigate = useNavigate()
 
     return (
         <section className="w-[90%] max-w-440 mx-auto">
@@ -61,8 +62,16 @@ export default function MeComponent() {
             </div> {/* End of the card*/}
             <div className="text-text-main bg-surface p-8 rounded-xl shadow-card my-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <h2 className="text-2xl font-bold">Editar perfil</h2>
-                <button className="bg-secondary hover:bg-secondary-hover hover:scale-105 text-text-main px-8 py-4 rounded-xl text-2xl font-black cursor-pointer transition-all duration-300">Editar</button>
-
+                <div className="flex gap-4">
+                    <button
+                        onClick={() => navigate('edit-basic-info')}
+                        className="bg-primary hover:bg-primary-hover hover:scale-105 text-text-main px-8 py-4 rounded-xl text-xl font-black cursor-pointer transition-all duration-300"
+                    >Editar Información Básica</button>
+                    <button
+                        onClick={() => navigate('edit-detail-info')}
+                        className="bg-secondary hover:bg-secondary-hover hover:scale-105 text-text-main px-8 py-4 rounded-xl text-xl font-black cursor-pointer transition-all duration-300"
+                    >Editar Información Detallada</button>
+                </div>
             </div>
             <div >
                 <Outlet />

@@ -6,9 +6,9 @@ export default function Footer() {
         <footer className="text-main bg-surface p-8">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-[90%] max-w-440 mx-auto min-h-44">
                 <div>
-                    <h2 className="font-bold text-5xl">FitMetric</h2>
-                    <p className="text-muted text-2xl">FitMetric &copy; {new Date().getFullYear()}</p>
-                    <p className="text-muted text-2xl">Un seguidor sencillo de calorías y macronutrientes</p>
+                    <h2 className="font-bold text-4xl md:text-5xl">FitMetric</h2>
+                    <p className="text-muted text-xl md:text-2xl">FitMetric &copy; {new Date().getFullYear()}</p>
+                    <p className="text-muted text-xl md:text-2xl">Un seguidor sencillo de calorías y macronutrientes</p>
                 </div>
                 <div>
                     <h2 className="font-bold text-4xl mb-4">Navegación</h2>

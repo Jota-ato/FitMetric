@@ -13,10 +13,11 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/" element={<App />} />
                 <Route element={<Layout />}>
                     <Route path="/profile" element={<MeComponent />} />
+                    <Route path="/profile/edit" element={<div>Editar</div>} />
                     <Route path="/diary" element={<div>Diario</div>} />
                     <Route path="/reports" element={<div>Informes</div>} />
                 </Route>
             </Routes>
         </BrowserRouter>
-    </StrictMode>,
+    </StrictMode>
 )

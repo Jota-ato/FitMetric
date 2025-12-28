@@ -1,4 +1,5 @@
 import { usePatientStore } from "../../stores/PatientStore"
+import { Outlet } from "react-router"
 import CaloriesCard from "./CaloriesCard"
 import DataCard from "./DataCard"
 
@@ -56,8 +57,15 @@ export default function MeComponent() {
                     />
 
 
-                </div>
+                </div> {/* End of the grid*/}
+            </div> {/* End of the card*/}
+            <div className="text-text-main bg-surface p-8 rounded-xl shadow-card my-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <h2 className="text-2xl font-bold">Editar perfil</h2>
+                <button className="bg-secondary hover:bg-secondary-hover hover:scale-105 text-text-main px-8 py-4 rounded-xl text-2xl font-black cursor-pointer transition-all duration-300">Editar</button>
 
+            </div>
+            <div >
+                <Outlet />
             </div>
         </section>
     )

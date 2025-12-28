@@ -11,6 +11,7 @@ export default function MeComponent() {
     const sex = usePatientStore(state => state.sex)
     const BMR = usePatientStore(state => state.BMR)
     const TDEE = usePatientStore(state => state.TDEE)
+    const caloriesNeeded = usePatientStore(state => state.caloriesNeeded)
 
     return (
         <section className="w-[90%] max-w-440 mx-auto">
@@ -19,6 +20,10 @@ export default function MeComponent() {
                 <div className="grid md:grid-cols-4 gap-4">
                     <CaloriesCard name="Metabolismo basal" calories={BMR} />
                     <CaloriesCard name="Gasto energético diario" calories={TDEE} />
+                    <CaloriesCard
+                        name="Calorías necesarias con base en tu objetivo"
+                        calories={caloriesNeeded}
+                    />
                     <DataCard
                         title="Peso"
                         value={weight}
@@ -38,6 +43,7 @@ export default function MeComponent() {
                         title="Género"
                         value={sex}
                     />
+
                 </div>
 
             </div>

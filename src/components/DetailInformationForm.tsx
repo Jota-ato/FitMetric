@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { usePatientStore } from "../stores/PatientStore"
-import type { GoalType, PurposeType } from "../types"
+import type { GoalType, PurposeType, ActivityFactorType } from "../types"
 import CenterContainer from "./CenterContainer"
 import FormContainer from "./FormContainer"
 import { usePageStore } from "../stores/PageStore"
@@ -8,6 +8,7 @@ import { usePageStore } from "../stores/PageStore"
 type DetailInformationInputsType = {
     goal: GoalType
     purpose: PurposeType
+    activityFactor: ActivityFactorType
 }
 
 export default function DetailInformationForm() {
@@ -18,7 +19,8 @@ export default function DetailInformationForm() {
     const { register, handleSubmit, formState: { errors } } = useForm<DetailInformationInputsType>({
         defaultValues: {
             goal: "" as GoalType, // Iniciamos vacío para forzar la validación
-            purpose: "" as PurposeType // Iniciamos vacío para forzar la validación
+            purpose: "" as PurposeType, // Iniciamos vacío para forzar la validación
+            activityFactor: "" as ActivityFactorType // Iniciamos vacío para forzar la validación
         }
     })
 
@@ -33,6 +35,25 @@ export default function DetailInformationForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <fieldset className="space-y-8">
                         <legend className="text-4xl font-bold">Objetivos y propósitos</legend>
+
+                        <div className="space-y-4">
+                            <label htmlFor="activityFactor" className="block text-2xl font-semibold">¿Qué tan activo eres?</label>
+                            <select
+                                id="activityFactor"
+                                className={`text-2xl block border-b focus:outline-none w-full focus:bg-surface ${errors.activityFactor ? "border-red-500" : "border-text-main"
+                                    }`}
+                                {...register("activityFactor", { required: "Selecciona un objetivo" })}
+                            >
+                                <option value="" defaultValue={"Selecciona tu actividad"} disabled>Selecciona tu actividad</option>
+                                <option value="Sedentary">Sedentario</option>
+                                <option value="Light">Baja actividad</option>
+                                <option value="Moderate">Moderada actividad</option>
+                                <option value="Very">Alta actividad</option>
+                                <option value="Extreme">Extrema actividad</option>
+                            </select>
+                            {/* 4. IMPORTANTE: Mostrar error del select */}
+                            {errors.activityFactor && <p className="text-red-500 text-xl mt-1">{errors.activityFactor.message}</p>}
+                        </div>
 
                         <div className="space-y-4">
                             <label htmlFor="goal" className="block text-2xl font-semibold">Objetivo</label>

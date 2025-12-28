@@ -107,7 +107,7 @@ export default function RegistationForm() {
                     </div>
 
                     <button type="submit" className="bg-primary text-main font-bold text-2xl p-4 w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                        Continuar
+                        {pathname === "/profile/edit-basic-info" ? "Guardar cambios" : "Continuar"}
                     </button>
                 </fieldset>
             </form>

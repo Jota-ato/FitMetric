@@ -96,7 +96,7 @@ export default function DetailInformationForm() {
                     </div>
 
                     <button type="submit" className="bg-primary text-main font-bold text-2xl p-4 w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
-                        Finalizar formulario
+                        {pathname === "/profile/edit-detail-info" ? "Guardar cambios" : "Finalizar formulario"}
                     </button>
                 </fieldset>
             </form>

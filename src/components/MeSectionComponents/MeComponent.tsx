@@ -12,18 +12,16 @@ export default function MeComponent() {
     const BMR = usePatientStore(state => state.BMR)
     const TDEE = usePatientStore(state => state.TDEE)
     const caloriesNeeded = usePatientStore(state => state.caloriesNeeded)
+    const goal = usePatientStore(state => state.goal)
+    const purpose = usePatientStore(state => state.purpose)
 
     return (
         <section className="w-[90%] max-w-440 mx-auto">
             <h1 className="my-8 text-center text-6xl font-bold">Perfil ({name})</h1>
             <div className="text-text-main bg-surface p-8 rounded-xl shadow-card">
-                <div className="grid md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <CaloriesCard name="Metabolismo basal" calories={BMR} />
                     <CaloriesCard name="Gasto energético diario" calories={TDEE} />
-                    <CaloriesCard
-                        name="Calorías necesarias con base en tu objetivo"
-                        calories={caloriesNeeded}
-                    />
                     <DataCard
                         title="Peso"
                         value={weight}
@@ -43,6 +41,20 @@ export default function MeComponent() {
                         title="Género"
                         value={sex}
                     />
+                    <DataCard
+                        title="Objetivo"
+                        value={goal}
+                    />
+                    <CaloriesCard
+                        name="Calorías necesarias con base en tu objetivo"
+                        calories={caloriesNeeded}
+                    />
+                    <DataCard
+                        title="Propósito"
+                        value={purpose}
+                        tailwindStyles="row-start-5 col-start-2 md:row-auto md:col-auto"
+                    />
+
 
                 </div>
 

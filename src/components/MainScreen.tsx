@@ -8,7 +8,7 @@ export default function MainScreen() {
 
     return (
         <CenterContainer>
-            <div className="flex flex-col items-center gap-6 animate-fade-in bg-surface">
+            <div className="flex flex-col items-center gap-6 animate-fade-in">
                 {/* Logo */}
                 <div className="relative group">
                     <img

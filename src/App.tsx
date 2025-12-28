@@ -4,11 +4,14 @@ import { useEffect, useState } from "react"
 import RegistationForm from "./components/RegistationForm"
 import { usePageStore } from "./stores/PageStore"
 import DetailInformationForm from "./components/DetailInformationForm"
+import { useTheme } from "./hooks/useTheme"
+import { useNavigate } from "react-router"
 
 function App() {
-
+    useTheme() // This will apply the theme to the app
     const [starting, setStarting] = useState(true)
-    const step = usePageStore(state => state.step)
+    const { step } = usePageStore()
+    const navigate = useNavigate()
 
     useEffect(() => {
         setTimeout(() => {
@@ -16,14 +19,24 @@ function App() {
         }, 2000)
     }, [])
 
+    useEffect(() => {
+        if (step >= 3) {
+            navigate('/profile')
+        }
+    }, [step, navigate])
+
     if (starting) return <MainScreen />
 
-    return (
-        <>
-            {step === 1 ? <RegistationForm /> : step === 2 ? <DetailInformationForm /> : <h1>Step 3</h1>}
-            <FloatingThemeButton />
-        </>
-    )
+    if (step < 3) {
+        return (
+            <>
+                {step === 1 ? <RegistationForm /> : <DetailInformationForm />}
+                <FloatingThemeButton />
+            </>
+        )
+    }
+
+    return null
 }
 
 export default App

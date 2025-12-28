@@ -1,6 +1,6 @@
 
 import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { persist, devtools } from "zustand/middleware"
 import type { GenderType } from "../types"
 
 interface BasicInfo {
@@ -19,12 +19,16 @@ export type PageStoreType = {
 }
 
 export const usePageStore = create<PageStoreType>()(
-    persist(
+    devtools(persist(
         (set) => ({
             isBasicInfoFull: false,
             step: 1,
             setIsFullBasicInfo: (basicInfo: BasicInfo) => {
-                const isFull = Object.values(basicInfo).every(value => value !== null && value !== "" && value > 0)
+                const numberInfo = Object.values(basicInfo).filter(value => typeof value === 'number')
+                const stringInfo = Object.values(basicInfo).filter(value => typeof value === 'string')
+                const areNumberFull = numberInfo.every(value => value > 0)
+                const areStringFull = stringInfo.every(value => value !== "")
+                const isFull = areNumberFull && areStringFull
                 set({ isBasicInfoFull: isFull })
             },
             setStep: (step: number) => set({ step })
@@ -33,9 +37,10 @@ export const usePageStore = create<PageStoreType>()(
             name: 'page-storage',
             partialize(state) {
                 return {
-                    isBasicInfoFull: state.isBasicInfoFull
+                    isBasicInfoFull: state.isBasicInfoFull,
+                    step: state.step
                 }
             },
         }
     )
-)
+    ))

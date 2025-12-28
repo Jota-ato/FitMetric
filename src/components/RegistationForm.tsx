@@ -25,7 +25,7 @@ export default function RegistationForm() {
     const onSubmit: SubmitHandler<RegistrationFields> = (data) => {
         // Al usar valueAsNumber en el register, data ya trae números
         setPatientData(data)
-        if (name && weight > 0 && height > 0 && age > 0 && sex) {
+        if (name && (weight > 0) && (height > 0) && (age > 0) && sex) {
             setIsFullBasicInfo({ name, weight, height, age, sex })
             setStep(2)
         }

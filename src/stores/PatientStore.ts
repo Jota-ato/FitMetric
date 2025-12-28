@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage, devtools } from 'zustand/middleware'
 import type { ActivityFactorType, GenderType, GoalType, PurposeType } from '../types'
 import { calculateBMR, calculateCaloriesNeeded, calculateTDEE } from '../logic/CaloriesCalculations'
 import { calculateMacrosInGrams, type MacronutrientBreakdown } from '../logic/MacrosCalculations'
@@ -29,7 +29,7 @@ type PatientState = {
 }
 
 export const usePatientStore = create<PatientState>()(
-    persist(
+    devtools(persist(
         (set, get) => ({
             name: "",
             weight: 0,
@@ -61,7 +61,6 @@ export const usePatientStore = create<PatientState>()(
                 const newState = { ...get(), ...data }
                 const { BMR, TDEE, caloriesNeeded } = get().calculateCalories(newState)
                 const macros = get().calculateMacros(caloriesNeeded, newState.purpose)
-                console.log({ ...data, BMR, TDEE, caloriesNeeded, macros })
                 set({ ...data, BMR, TDEE, caloriesNeeded, macros })
             },
             calculateCalories: (stats) => {
@@ -95,4 +94,4 @@ export const usePatientStore = create<PatientState>()(
             storage: createJSONStorage(() => localStorage)
         }
     )
-)
+    ))

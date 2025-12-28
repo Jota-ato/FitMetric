@@ -4,6 +4,8 @@
     /* Mapping de Colores Dinámicos */
     --color-background: var(--bg);
     --color-surface: var(--surface);
+    --color-gray-200: var(--surface-gray);
+    --color-gray-800: var(--surface-gray-dark);
     --color-main: var(--text-main);
     --color-muted: var(--text-muted);
 
@@ -25,6 +27,8 @@
 :root {
     --bg: #ffffff;
     --surface: #f8fafc;
+    --surface-gray: #e5e7eb;
+    --surface-gray-dark: #1e293b;
     --text-main: #0f172a;
     --text-muted: #64748b;
 
@@ -46,6 +50,8 @@
 .dark {
     --bg: #0f172a;
     --surface: #1e293b;
+    --surface-gray: #1f2131;
+    --surface-gray-dark: #696969;
     --text-main: #f1f5f9;
     --text-muted: #94a3b8;
 

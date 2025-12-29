@@ -1,5 +1,5 @@
-import { translateGender, translateGoal, translatePurpose } from "../../helpers"
-import type { GenderType, GoalType, PurposeType } from "../../types"
+import { translateGender, translateGoal, translatePurpose } from "../../../helpers"
+import type { GenderType, GoalType, PurposeType } from "../../../types"
 
 
 type DataCardProps = {

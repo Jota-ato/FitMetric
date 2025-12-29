@@ -1,4 +1,4 @@
-import { usePatientStore } from "../../stores/PatientStore"
+import { usePatientStore } from "../../../stores/PatientStore"
 import { Outlet, useNavigate } from "react-router"
 import CaloriesCard from "./CaloriesCard"
 import DataCard from "./DataCard"

@@ -7,7 +7,6 @@ import { usePageStore } from "../../stores/PageStore"
 
 export default function Layout() {
     useTheme()
-    console.log(import.meta.env)
 
     const isBasic = usePageStore(state => state.isBasicInfoFull)
     const { pathname } = useLocation()

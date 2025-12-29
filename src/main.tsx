@@ -7,6 +7,7 @@ import Layout from './components/Layouts/Layout.tsx'
 import MeComponent from './components/Pages/MeSectionComponents/MeComponent.tsx'
 import RegistationForm from './components/RegistationForm.tsx'
 import DetailInformationForm from './components/DetailInformationForm.tsx'
+import DiaryComponent from './components/Pages/DiarySectionComponents/DiaryComponent.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -18,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
                         <Route path="edit-basic-info" element={<RegistationForm />} />
                         <Route path="edit-detail-info" element={<DetailInformationForm />} />
                     </Route>
-                    <Route path="diary" element={<div>Diario</div>} />
+                    <Route path="diary" element={<DiaryComponent />} />
                     <Route path="reports" element={<div>Informes</div>} />
                 </Route>
             </Routes>

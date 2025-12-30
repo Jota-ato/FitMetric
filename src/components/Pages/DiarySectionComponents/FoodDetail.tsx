@@ -138,7 +138,7 @@ export default function FoodDetail() {
                                 <span className="text-accent">📊</span>
                                 Datos nutricionales
                                 <span className="text-sm font-normal text-muted ml-2">
-                                    (por {activeFood.servingSize} {activeFood.servingSizeUnit})
+                                    (por {activeFood.servingSize ? activeFood.servingSize : "100"} {activeFood.servingSizeUnit ? activeFood.servingSizeUnit : "g"})
                                 </span>
                             </h3>
                             <MacrosGrid

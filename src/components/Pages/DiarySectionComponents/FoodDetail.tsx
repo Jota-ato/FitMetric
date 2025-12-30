@@ -3,6 +3,7 @@ import { useParams } from "react-router"
 import { usdaStore } from "../../../stores/usdaStore"
 import MacrosGrid from "./MacrosGrid"
 import { getNutrients } from "../../../helpers"
+import Spinner from "../../Spinner"
 
 // Función helper para obtener las unidades disponibles
 function getAvailableUnits(baseUnit?: string): string[] {
@@ -58,7 +59,7 @@ function convertUnit(value: number, fromUnit: string, toUnit: string): number {
 
 export default function FoodDetail() {
 
-    const { activeFood, getFoodById } = usdaStore()
+    const { activeFood, getFoodById, isLoading } = usdaStore()
     const params = useParams()
 
     // Estado para la porción personalizada - el usuario ingresará estos valores
@@ -247,13 +248,17 @@ export default function FoodDetail() {
                         </section>
                     </main>
                 </article>
-            ) : (
+            ) : isLoading ?
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
-                    <div className="text-6xl opacity-30">🍽️</div>
-                    <p className="text-xl text-muted">No hay comida seleccionada</p>
-                    <p className="text-sm text-muted/70">Selecciona un alimento para ver sus detalles nutricionales</p>
+                    <Spinner />
                 </div>
-            )}
+                : (
+                    <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
+                        <div className="text-6xl opacity-30">🍽️</div>
+                        <p className="text-xl text-muted">No hay comida seleccionada</p>
+                        <p className="text-sm text-muted/70">Selecciona un alimento para ver sus detalles nutricionales</p>
+                    </div>
+                )}
         </div>
     )
 }

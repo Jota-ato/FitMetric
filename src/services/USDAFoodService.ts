@@ -44,7 +44,6 @@ export const USDAFoodService = {
     getFoodById: async (id: string): Promise<USDAFoodDetail> => {
         try {
             const { data } = await usdaClient.get<USDAFoodDetail>(`/food/${id}`)
-            console.log(data)
             return { ...data, servingSizeUnit: normalizeUnit(data.servingSizeUnit) }
         } catch (err) {
             console.log("Error fetching from USDA: ", err)

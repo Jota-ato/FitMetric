@@ -42,6 +42,7 @@ export const usePageStore = create<PageStoreType>()(
             partialize(state) {
                 return {
                     isBasicInfoFull: state.isBasicInfoFull,
+                    hasModal: state.hasModal,
                     step: state.step
                 }
             },

@@ -57,8 +57,6 @@ interface MacronutrientBreakdown {
 export function getNutrients(food: USDAFoodDetail): MacronutrientBreakdown {
     const nutreintsArray = food.foodNutrients.filter(nutrient => nutrient.nutrient.id === 1003 || nutrient.nutrient.id === 1004 || nutrient.nutrient.id === 1005 || nutrient.nutrient.id === 1008)
 
-    console.log(nutreintsArray)
-
     const protein = nutreintsArray.find(n => n.nutrient.id === 1003)?.amount ?? 0
     const fat = nutreintsArray.find(n => n.nutrient.id === 1004)?.amount ?? 0
     const carbohydrate = nutreintsArray.find(n => n.nutrient.id === 1005)?.amount ?? 0

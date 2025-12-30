@@ -4,8 +4,8 @@
     /* Mapping de Colores Dinámicos */
     --color-background: var(--bg);
     --color-surface: var(--surface);
-    --color-gray-200: var(--surface-gray);
-    --color-gray-800: var(--surface-gray-dark);
+    --color-surface-gray: var(--surface-gray);
+    --color-surface-gray-dark: var(--surface-gray-dark);
     --color-main: var(--text-main);
     --color-muted: var(--text-muted);
 

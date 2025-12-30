@@ -34,7 +34,7 @@ export const USDAFoodService = {
                     page_size
                 }
             })
-            console.log(data)
+            return data
         } catch (err) {
             console.log("Error fetching from USDA: ", err)
             throw err

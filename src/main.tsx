@@ -9,7 +9,7 @@ import RegistationForm from './components/RegistationForm.tsx'
 import DetailInformationForm from './components/DetailInformationForm.tsx'
 import DiaryComponent from './components/Pages/DiarySectionComponents/DiaryComponent.tsx'
 import SearchFood from './components/Pages/DiarySectionComponents/SearchFood.tsx'
-import FoodDetail from './components/Pages/DiarySectionComponents/FoodDetail.tsx'
+import FoodDetail from './components/Pages/DiarySectionComponents/foodDetailComponents/FoodDetail.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

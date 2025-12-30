@@ -8,7 +8,8 @@ export default function FoodOverview({ food }: { food: USDASFood }) {
     const navigate = useNavigate()
     const nutrients = food.foodNutrients.filter(nutrient => nutrient.nutrientId === 1003 || nutrient.nutrientId === 1004 || nutrient.nutrientId === 1005 || nutrient.nutrientId === 1008)
     const owner = food.brandOwner ? food.brandOwner : "Articulo natural"
-    const servingSize = food.servingSize ? food.servingSize : "100g"
+    const hasServingSize = food.servingSize && food.servingSizeUnit
+    const servingSize = hasServingSize ? `${food.servingSize}${food.servingSizeUnit}` : "100g"
 
     return (
         <article className="p-4 border border-surface-gray-dark rounded-xl">

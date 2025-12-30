@@ -14,14 +14,17 @@ interface BasicInfo {
 export type PageStoreType = {
     isBasicInfoFull: boolean
     step: number
+    hasModal: boolean
     setIsFullBasicInfo: (basicInfo: BasicInfo) => void
     setStep: (step: number) => void
+    setHasModal: (hasModal: boolean) => void
 }
 
 export const usePageStore = create<PageStoreType>()(
     devtools(persist(
         (set) => ({
             isBasicInfoFull: false,
+            hasModal: false,
             step: 1,
             setIsFullBasicInfo: (basicInfo: BasicInfo) => {
                 const numberInfo = Object.values(basicInfo).filter(value => typeof value === 'number')
@@ -31,7 +34,8 @@ export const usePageStore = create<PageStoreType>()(
                 const isFull = areNumberFull && areStringFull
                 set({ isBasicInfoFull: isFull })
             },
-            setStep: (step: number) => set({ step })
+            setStep: (step: number) => set({ step }),
+            setHasModal: (hasModal: boolean) => set({ hasModal })
         }),
         {
             name: 'page-storage',

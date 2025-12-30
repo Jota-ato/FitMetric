@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router"
+import MacrosGrid from "./MacrosGrid"
+import { usePageStore } from "../../../stores/PageStore"
 
 interface MealComponentProps {
     mealName: string
@@ -6,7 +7,7 @@ interface MealComponentProps {
 
 export default function MealComponent({ mealName }: MealComponentProps) {
 
-    const navigate = useNavigate()
+    const setHasModal = usePageStore(state => state.setHasModal)
 
     return (
         <article className="bg-surface p-8 rounded-xl border border-surface-">
@@ -15,19 +16,18 @@ export default function MealComponent({ mealName }: MealComponentProps) {
                 <button
                     className="bg-secondary hover:bg-secondary-hover text-text-main px-8 py-4 rounded-xl text-xl font-bold cursor-pointer transition-all duration-300"
                     type="button"
-                    onClick={() => navigate('/diary/searchFood')}
+                    onClick={() => setHasModal(true)}
                 >
                     Agregar comida
                 </button>
             </header>
             <div className="flex flex-col gap-4 mt-4">
-                <h3 className="text-center text-2xl text-muted">Macronutrientes</h3>
-                <div className="flex flex-row justify-center gap-8">
-                    <p className="text-xl md:text-2xl">Calorías: <span className="font-bold">0</span></p>
-                    <p className="text-xl md:text-2xl">Proteínas: <span className="font-bold">0</span></p>
-                    <p className="text-xl md:text-2xl">Carbohidratos: <span className="font-bold">0</span></p>
-                    <p className="text-xl md:text-2xl">Grasas: <span className="font-bold">0</span></p>
-                </div>
+                <MacrosGrid
+                    calories={0}
+                    protein={0}
+                    carbs={0}
+                    fats={0}
+                />
             </div>
             <div>
                 <h3>comidas</h3>

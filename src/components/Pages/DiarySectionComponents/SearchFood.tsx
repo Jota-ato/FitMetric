@@ -35,20 +35,23 @@ export default function SearchFood() {
                 />
             </form>
             <div> {/* Aqui van los resultados */}
-                {isLoading ?
-                    <div className="w-full h-full flex items-center justify-center my-20 p-8">
-                        <Spinner />
-                    </div>
-                    : foods.length ?
-                        <div className="space-y-8 my-8">
-                            {foods.map(food => (
-                                <FoodOverview
-                                    key={food.fdcId}
-                                    food={food} />
-                            ))}
+                {searchQuery === "" ?
+                    <p className="text-center text-xl md:text-2xl font-bold my-8 text-muted">Busca algo para empezar</p>
+                    :
+                    isLoading ?
+                        <div className="w-full h-full flex items-center justify-center my-20 p-8">
+                            <Spinner />
                         </div>
-                        :
-                        <p>No hay resultados</p>
+                        : foods.length ?
+                            <div className="space-y-8 my-8">
+                                {foods.map(food => (
+                                    <FoodOverview
+                                        key={food.fdcId}
+                                        food={food} />
+                                ))}
+                            </div>
+                            :
+                            <p className="text-center text-xl md:text-2xl font-bold my-8 text-muted">No hay resultados</p>
                 }
             </div>
         </section>

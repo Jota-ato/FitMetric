@@ -1,12 +1,11 @@
 import MealComponent from "./MealComponent"
-import { Outlet, useLocation } from "react-router"
+import { Outlet } from "react-router"
 import Modal from "../../Modal"
-import { useMemo } from "react"
+import { usePageStore } from "../../../stores/PageStore"
 
 export default function DiaryComponent() {
 
-    const { pathname } = useLocation()
-    const showModal = useMemo(() => pathname === "/diary/searchFood", [pathname])
+    const hasModal = usePageStore(state => state.hasModal)
 
     return (
         <section className="w-[90%] max-w-440 mx-auto mb-8">
@@ -17,9 +16,10 @@ export default function DiaryComponent() {
                 <MealComponent mealName="Cena" />
                 <MealComponent mealName="Snack" />
             </div>
-            {showModal && <Modal>
-                <Outlet />
-            </Modal>
+            {hasModal &&
+                <Modal>
+                    <Outlet />
+                </Modal>
             }
 
         </section>

@@ -1,5 +1,12 @@
 // src/types/usdaTypes.ts (o dentro del mismo servicio si prefieres)
 
+export type NutrientId = {
+    1003: "Protein",
+    1004: "Carbohydrate, by difference",
+    1005: "Total lipid(fat)",
+    1006: "Energy"
+}
+
 export type USDASFood = {
     fdcId: number;
     description: string;

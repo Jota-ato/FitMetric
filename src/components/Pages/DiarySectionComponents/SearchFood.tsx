@@ -9,6 +9,7 @@ export default function SearchFood() {
     const [searchQuery, setSearchQuery] = useState("")
     const debouncedValue = useDebounce(searchQuery, 1000)
     const searchFoods = usdaStore(state => state.searchFoods)
+    const resetFoods = usdaStore(state => state.resetFoods)
     const isLoading = usdaStore(state => state.isLoading)
     const foods = usdaStore(state => state.foods)
 
@@ -19,9 +20,10 @@ export default function SearchFood() {
 
     useEffect(() => {
         if (debouncedValue) {
+            resetFoods()
             searchFoods(debouncedValue)
         }
-    }, [debouncedValue, searchFoods])
+    }, [debouncedValue, searchFoods, resetFoods])
 
     return (
         <section className="w-[90%] max-w-440 h-[90%] mx-auto overflow-y-auto p-8 bg-surface-gray rounded-xl">

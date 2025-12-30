@@ -9,6 +9,7 @@ import RegistationForm from './components/RegistationForm.tsx'
 import DetailInformationForm from './components/DetailInformationForm.tsx'
 import DiaryComponent from './components/Pages/DiarySectionComponents/DiaryComponent.tsx'
 import SearchFood from './components/Pages/DiarySectionComponents/SearchFood.tsx'
+import FoodDetail from './components/Pages/DiarySectionComponents/FoodDetail.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
                     </Route>
                     <Route path="diary" element={<DiaryComponent />}>
                         <Route path="searchFood" element={<SearchFood />} />
+                        <Route path="foodDetail/:id" element={<FoodDetail />} />
                     </Route>
                     <Route path="reports" element={<div>Informes</div>} />
                 </Route>

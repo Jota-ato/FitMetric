@@ -1,4 +1,5 @@
 import MacrosGrid from "./MacrosGrid"
+import { useNavigate } from "react-router"
 import { usePageStore } from "../../../stores/PageStore"
 
 interface MealComponentProps {
@@ -8,6 +9,11 @@ interface MealComponentProps {
 export default function MealComponent({ mealName }: MealComponentProps) {
 
     const setHasModal = usePageStore(state => state.setHasModal)
+    const navigate = useNavigate()
+    const handleMealClick = () => {
+        navigate(`/diary/searchFood`)
+        setHasModal(true)
+    }
 
     return (
         <article className="bg-surface p-8 rounded-xl border border-surface-">
@@ -16,7 +22,7 @@ export default function MealComponent({ mealName }: MealComponentProps) {
                 <button
                     className="bg-secondary hover:bg-secondary-hover text-text-main px-8 py-4 rounded-xl text-xl font-bold cursor-pointer transition-all duration-300"
                     type="button"
-                    onClick={() => setHasModal(true)}
+                    onClick={handleMealClick}
                 >
                     Agregar comida
                 </button>

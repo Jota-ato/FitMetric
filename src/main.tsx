@@ -19,7 +19,9 @@ createRoot(document.getElementById('root')!).render(
                         <Route path="edit-basic-info" element={<RegistationForm />} />
                         <Route path="edit-detail-info" element={<DetailInformationForm />} />
                     </Route>
-                    <Route path="diary" element={<DiaryComponent />} />
+                    <Route path="diary" element={<DiaryComponent />}>
+                        <Route path="searchFood" element={<div>Buscar comida</div>} />
+                    </Route>
                     <Route path="reports" element={<div>Informes</div>} />
                 </Route>
             </Routes>

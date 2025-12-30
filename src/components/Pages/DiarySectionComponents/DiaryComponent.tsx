@@ -1,9 +1,12 @@
-import { USDAFoodService } from "../../../services/USDAFoodService"
 import MealComponent from "./MealComponent"
+import { Outlet, useLocation } from "react-router"
+import Modal from "../../Modal"
+import { useMemo } from "react"
 
 export default function DiaryComponent() {
-    USDAFoodService.searchFoods('rice')
 
+    const { pathname } = useLocation()
+    const showModal = useMemo(() => pathname === "/diary/searchFood", [pathname])
 
     return (
         <section className="w-[90%] max-w-440 mx-auto mb-8">
@@ -14,6 +17,11 @@ export default function DiaryComponent() {
                 <MealComponent mealName="Cena" />
                 <MealComponent mealName="Snack" />
             </div>
+            {showModal && <Modal>
+                <Outlet />
+            </Modal>
+            }
+
         </section>
     )
 }

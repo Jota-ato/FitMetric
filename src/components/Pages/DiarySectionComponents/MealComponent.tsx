@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router"
 
 interface MealComponentProps {
     mealName: string
 }
 
 export default function MealComponent({ mealName }: MealComponentProps) {
+
+    const navigate = useNavigate()
+
     return (
         <article className="bg-surface p-8 rounded-xl border border-surface-">
             <header className="flex justify-between items-center border-b border-surface-gray-dark pb-4">
@@ -11,6 +15,7 @@ export default function MealComponent({ mealName }: MealComponentProps) {
                 <button
                     className="bg-secondary hover:bg-secondary-hover text-text-main px-8 py-4 rounded-xl text-xl font-bold cursor-pointer transition-all duration-300"
                     type="button"
+                    onClick={() => navigate('/diary/searchFood')}
                 >
                     Agregar comida
                 </button>

@@ -1,18 +1,24 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import type { FoodType } from "../types/DiaryTypes";
+import { USDAFoodService } from "../services/USDAFoodService";
+import type { USDASFood } from "../types/usdaTypes";
 
 type usdaStoreType = {
-    foods: FoodType[],
-    searchFoods: (query: string) => void
+    foods: USDASFood[],
+    isLoading: boolean,
+    searchFoods: (query: string) => Promise<void>
 }
 
 export const usdaStore = create<usdaStoreType>()(
     devtools(
-        () => ({
+        (set) => ({
             foods: [],
-            searchFoods: (query: string) => {
-                console.log(query)
+            isLoading: false,
+            searchFoods: async (query: string) => {
+                set({ isLoading: true })
+                const foods = await USDAFoodService.searchFoods(query)
+                set({ foods: foods.slice(0, 20) })
+                set({ isLoading: false })
             }
         })
     )

@@ -1,16 +1,20 @@
 import { usdaStore } from "../../../stores/usdaStore"
 import { type ChangeEvent, useEffect, useState } from "react"
+import Spinner from "../../Spinner"
 import useDebounce from "../../../hooks/useDebounce"
+import FoodOverview from "./FoodOverview"
 
 export default function SearchFood() {
 
     const [searchQuery, setSearchQuery] = useState("")
     const debouncedValue = useDebounce(searchQuery, 1000)
     const searchFoods = usdaStore(state => state.searchFoods)
+    const isLoading = usdaStore(state => state.isLoading)
+    const foods = usdaStore(state => state.foods)
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value)
-        console.log(debouncedValue)
     }
 
     useEffect(() => {
@@ -20,7 +24,7 @@ export default function SearchFood() {
     }, [debouncedValue, searchFoods])
 
     return (
-        <section className="w-[90%] max-w-440 h-[90%] mx-auto p-8 bg-surface-gray rounded-xl">
+        <section className="w-[90%] max-w-440 h-[90%] mx-auto overflow-y-auto p-8 bg-surface-gray rounded-xl">
             <h2 className="text-4xl text-center font-bold">Buscar comida</h2>
             <form action="">
                 <input
@@ -30,6 +34,23 @@ export default function SearchFood() {
                     onChange={handleChange}
                 />
             </form>
+            <div> {/* Aqui van los resultados */}
+                {isLoading ?
+                    <div className="w-full h-full flex items-center justify-center my-20 p-8">
+                        <Spinner />
+                    </div>
+                    : foods.length ?
+                        <div className="space-y-8 my-8">
+                            {foods.map(food => (
+                                <FoodOverview
+                                    key={food.fdcId}
+                                    food={food} />
+                            ))}
+                        </div>
+                        :
+                        <p>No hay resultados</p>
+                }
+            </div>
         </section>
     )
 }

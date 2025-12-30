@@ -1,6 +1,6 @@
 // src/types/usdaTypes.ts (o dentro del mismo servicio si prefieres)
 
-export type USDASearchResult = {
+export type USDASFood = {
     fdcId: number;
     description: string;
     dataType: string;
@@ -19,5 +19,5 @@ export type USDANutrient = {
 
 export type USDASearchResponse = {
     totalHits: number;
-    foods: USDASearchResult[];
+    foods: USDASFood[];
 }

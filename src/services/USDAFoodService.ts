@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { USDASearchResponse } from "../types/usdaTypes"
+import type { USDASearchResponse, USDASFood } from "../types/usdaTypes"
 
 export const usdaClient = axios.create({
     baseURL: "https://api.nal.usda.gov/fdc/v1",
@@ -26,7 +26,7 @@ export const usdaClient = axios.create({
 })
 
 export const USDAFoodService = {
-    searchFoods: async (query: string, page_size: number = 20) => {
+    searchFoods: async (query: string, page_size: number = 20): Promise<USDASFood[]> => {
         try {
             const { data } = await usdaClient.get<USDASearchResponse>('/foods/search', {
                 params: {
@@ -34,7 +34,7 @@ export const USDAFoodService = {
                     page_size
                 }
             })
-            return data
+            return data.foods
         } catch (err) {
             console.log("Error fetching from USDA: ", err)
             throw err

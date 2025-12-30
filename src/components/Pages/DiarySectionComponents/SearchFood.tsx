@@ -20,10 +20,15 @@ export default function SearchFood() {
 
     useEffect(() => {
         if (debouncedValue) {
-            resetFoods()
             searchFoods(debouncedValue)
         }
-    }, [debouncedValue, searchFoods, resetFoods])
+    }, [debouncedValue, searchFoods])
+
+    useEffect(() => {
+        if (searchQuery === "") {
+            resetFoods()
+        }
+    }, [searchQuery, resetFoods])
 
     return (
         <section className="w-[90%] max-w-440 h-[90%] mx-auto overflow-y-auto p-8 bg-surface-gray rounded-xl">

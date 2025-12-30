@@ -7,7 +7,6 @@ interface NutritionSectionProps {
     carbohydrate: number
     fat: number
     calories: number
-    servingSize?: number
     servingSizeUnit?: string
 }
 
@@ -16,7 +15,6 @@ export default function NutritionSection({
     carbohydrate,
     fat,
     calories,
-    servingSize,
     servingSizeUnit
 }: NutritionSectionProps) {
     return (
@@ -25,7 +23,7 @@ export default function NutritionSection({
                 <span className="text-accent">📊</span>
                 Datos nutricionales
                 <span className="text-sm font-normal text-muted ml-2">
-                    (por {servingSize ? servingSize : "100"} {servingSizeUnit ? servingSizeUnit : "g"})
+                    (por 100{servingSizeUnit ? servingSizeUnit : "g"})
                 </span>
             </h3>
             <MacrosGrid

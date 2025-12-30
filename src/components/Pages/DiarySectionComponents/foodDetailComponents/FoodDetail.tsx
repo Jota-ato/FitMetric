@@ -24,29 +24,22 @@ export default function FoodDetail() {
         }
     }, [params.id, getFoodById])
 
-    // Calcular los nutrientes usando useMemo para optimizar
     const nutrients = useMemo(() => {
         if (!activeFood) return null
         return getNutrients(activeFood)
     }, [activeFood])
 
-    // Obtener las unidades disponibles para el select
     const availableUnits = useMemo(() => {
         return getAvailableUnits(activeFood?.servingSizeUnit)
     }, [activeFood?.servingSizeUnit])
 
-    // Calcular nutrientes por porción personalizada
     const customPortionNutrients = useMemo(() => {
         if (!activeFood || !nutrients || !portionSize) return null
 
-        const baseSize = activeFood.servingSize ?? 100
+        const USDA_BASE_AMOUNT = 100;
         const baseUnit = activeFood.servingSizeUnit ?? "g"
-
-        // Convertir la porción personalizada a la unidad base
         const portionInBaseUnit = convertUnit(portionSize, portionUnit, baseUnit)
-
-        // Calcular el factor de multiplicación
-        const factor = portionInBaseUnit / baseSize
+        const factor = portionInBaseUnit / USDA_BASE_AMOUNT
 
         return {
             protein: nutrients.protein * factor,
@@ -56,7 +49,6 @@ export default function FoodDetail() {
         }
     }, [activeFood, nutrients, portionSize, portionUnit])
 
-    // Handlers para los cambios
     const handlePortionSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseFloat(e.target.value)
         setPortionSize(isNaN(value) ? 0 : value)
@@ -82,7 +74,6 @@ export default function FoodDetail() {
                             carbohydrate={nutrients.carbohydrate}
                             fat={nutrients.fat}
                             calories={nutrients.calories}
-                            servingSize={activeFood.servingSize}
                             servingSizeUnit={activeFood.servingSizeUnit}
                         />
 

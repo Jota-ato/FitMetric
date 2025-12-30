@@ -22,6 +22,31 @@ export function translatePurpose(purpose: PurposeType) {
     return purposesTranslation[purpose]
 }
 
+export const normalizeUnit = (unit: string | undefined | null): string => {
+    if (!unit) return "g";
+
+    const cleanUnit = unit.toUpperCase().trim();
+
+    const unitMap: Record<string, string> = {
+        "GRM": "g",
+        "G": "g",
+        "GRAMS": "g",
+        "GRAM": "g",
+        "GR": "g",
+        "MLT": "ml",
+        "ML": "ml",
+        "MILLILITERS": "ml",
+        "MLR": "ml",
+        "KCAL": "kcal",
+        "OZA": "oz",
+        "ONZ": "oz",
+        "OZ": "oz",
+        "LBR": "lb"
+    };
+
+    return unitMap[cleanUnit] || cleanUnit.toLowerCase();
+}
+
 interface MacronutrientBreakdown {
     protein: number
     fat: number

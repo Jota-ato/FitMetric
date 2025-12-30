@@ -1,5 +1,6 @@
 import axios from "axios"
 import type { USDASearchResponse, USDASFood, USDAFoodDetail } from "../types/usdaTypes"
+import { normalizeUnit } from "../helpers";
 
 export const usdaClient = axios.create({
     baseURL: "https://api.nal.usda.gov/fdc/v1",
@@ -34,7 +35,7 @@ export const USDAFoodService = {
                     page_size
                 }
             })
-            return data.foods
+            return data.foods.map(food => ({ ...food, servingSizeUnit: normalizeUnit(food.servingSizeUnit) }))
         } catch (err) {
             console.log("Error fetching from USDA: ", err)
             throw err
@@ -44,7 +45,7 @@ export const USDAFoodService = {
         try {
             const { data } = await usdaClient.get<USDAFoodDetail>(`/food/${id}`)
             console.log(data)
-            return data
+            return { ...data, servingSizeUnit: normalizeUnit(data.servingSizeUnit) }
         } catch (err) {
             console.log("Error fetching from USDA: ", err)
             throw err

@@ -11,10 +11,10 @@ export default function DiaryComponent() {
         <section className="w-[90%] max-w-440 mx-auto mb-8">
             <h1 className="my-8 text-center text-6xl font-bold">Diario</h1>
             <div className="space-y-8">
-                <MealComponent mealName="Desayuno" />
-                <MealComponent mealName="Almuerzo" />
-                <MealComponent mealName="Cena" />
-                <MealComponent mealName="Snack" />
+                <MealComponent mealLabel="Desayuno" mealType="Breakfast" />
+                <MealComponent mealLabel="Almuerzo" mealType="Lunch" />
+                <MealComponent mealLabel="Cena" mealType="Dinner" />
+                <MealComponent mealLabel="Snack" mealType="Snack" />
             </div>
             {hasModal &&
                 <Modal>

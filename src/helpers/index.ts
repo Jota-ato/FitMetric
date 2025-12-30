@@ -1,3 +1,4 @@
+import type { FoodInMeal } from "../stores/DiaryStore";
 import type { GenderType, GoalType, PurposeType } from "../types";
 import type { USDAFoodDetail } from "../types/usdaTypes";
 
@@ -54,7 +55,7 @@ interface MacronutrientBreakdown {
     calories: number
 }
 
-export function getNutrients(food: USDAFoodDetail): MacronutrientBreakdown {
+export function getNutrients(food: USDAFoodDetail | FoodInMeal): MacronutrientBreakdown {
     const nutreintsArray = food.foodNutrients.filter(nutrient => nutrient.nutrient.id === 1003 || nutrient.nutrient.id === 1004 || nutrient.nutrient.id === 1005 || nutrient.nutrient.id === 1008)
 
     const protein = nutreintsArray.find(n => n.nutrient.id === 1003)?.amount ?? 0

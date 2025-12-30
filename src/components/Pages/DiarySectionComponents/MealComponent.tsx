@@ -1,24 +1,28 @@
 import MacrosGrid from "./MacrosGrid"
 import { useNavigate } from "react-router"
 import { usePageStore } from "../../../stores/PageStore"
+import type { DiaryMealType } from "../../../types/DiaryTypes"
+import { diaryStore } from "../../../stores/DiaryStore"
 
 interface MealComponentProps {
-    mealName: string
+    mealLabel: string
+    mealType: DiaryMealType
 }
 
-export default function MealComponent({ mealName }: MealComponentProps) {
+export default function MealComponent({ mealLabel, mealType }: MealComponentProps) {
 
+    const meals = diaryStore(state => state.meals)
     const setHasModal = usePageStore(state => state.setHasModal)
     const navigate = useNavigate()
     const handleMealClick = () => {
-        navigate(`/diary/searchFood`)
+        navigate(`/diary/${mealType}/searchFood`)
         setHasModal(true)
     }
 
     return (
         <article className="bg-surface p-8 rounded-xl border border-surface-">
             <header className="flex justify-between items-center border-b border-surface-gray-dark pb-4">
-                <h2 className="text-4xl font-bold">{mealName}</h2>
+                <h2 className="text-4xl font-bold">{mealLabel}</h2>
                 <button
                     className="bg-secondary hover:bg-secondary-hover text-text-main px-8 py-4 rounded-xl text-xl font-bold cursor-pointer transition-all duration-300"
                     type="button"
@@ -36,7 +40,19 @@ export default function MealComponent({ mealName }: MealComponentProps) {
                 />
             </div>
             <div>
-                <h3>comidas</h3>
+                {
+                    meals[mealType].length ?
+                        <div className="space-y-4">
+                            {meals[mealType].map(food => (
+                                <div key={food.fdcId} className="text-xl md:text-2xl text-center border border-surface-gray-dark p-4 rounded-xl">
+                                    <p>{food.description}</p>
+                                    <p>{food.portionSize}{food.portionUnit}</p>
+                                </div>
+                            ))}
+                        </div>
+                        :
+                        <p className="text-center text-xl md:text-2xl text-muted">No hay comidas</p>
+                }
             </div>
         </article>
     )

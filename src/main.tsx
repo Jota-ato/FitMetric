@@ -22,8 +22,8 @@ createRoot(document.getElementById('root')!).render(
                         <Route path="edit-detail-info" element={<DetailInformationForm />} />
                     </Route>
                     <Route path="diary" element={<DiaryComponent />}>
-                        <Route path="searchFood" element={<SearchFood />} />
-                        <Route path="foodDetail/:id" element={<FoodDetail />} />
+                        <Route path=":mealType/searchFood" element={<SearchFood />} />
+                        <Route path=":mealType/foodDetail/:id" element={<FoodDetail />} />
                     </Route>
                     <Route path="reports" element={<div>Informes</div>} />
                 </Route>

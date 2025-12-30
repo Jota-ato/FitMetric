@@ -1,0 +1,1 @@
+export type DiaryMealType = "Breakfast" | "Lunch" | "Dinner" | "Snack"

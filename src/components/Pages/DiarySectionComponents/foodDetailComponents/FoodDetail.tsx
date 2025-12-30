@@ -1,5 +1,3 @@
-// components/food/detail/FoodDetail.tsx
-
 import { useEffect, useMemo, useState } from "react"
 import { useParams } from "react-router"
 import { usdaStore } from "../../../../stores/usdaStore"
@@ -9,12 +7,19 @@ import FoodHeader from "./FoodHeader"
 import NutritionSection from "./NutritionSection"
 import CustomPortionCalculator from "./CustomPortionCalculator"
 import { EmptyState, LoadingState } from "./EmptyState"
+import { diaryStore } from "../../../../stores/DiaryStore"
+import type { DiaryMealType } from "../../../../types/DiaryTypes"
+import { useNavigate } from "react-router"
+import { usePageStore } from "../../../../stores/PageStore"
 
 export default function FoodDetail() {
     const { activeFood, getFoodById, isLoading } = usdaStore()
     const params = useParams()
+    const setHasModal = usePageStore(state => state.setHasModal)
+    const navigate = useNavigate()
 
     // Estado para la porción personalizada
+    const addFood = diaryStore(state => state.addFoodToMeal)
     const [portionSize, setPortionSize] = useState<number>(100)
     const [portionUnit, setPortionUnit] = useState<string>("g")
 
@@ -23,6 +28,18 @@ export default function FoodDetail() {
             getFoodById(params.id)
         }
     }, [params.id, getFoodById])
+
+    const handleAddFood = () => {
+        if (!activeFood || !params.mealType) return
+        const newMeal = {
+            ...activeFood,
+            portionSize,
+            portionUnit,
+        }
+        addFood(newMeal, params.mealType as DiaryMealType)
+        navigate(-2)
+        setHasModal(false)
+    }
 
     const nutrients = useMemo(() => {
         if (!activeFood) return null
@@ -86,6 +103,14 @@ export default function FoodDetail() {
                             onPortionUnitChange={handlePortionUnitChange}
                         />
                     </main>
+                    <footer>
+                        <button
+                            className="w-full max-w-220 mx-auto bg-primary block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-primary-hover hover:scale-105 transition-all duration-300"
+                            onClick={handleAddFood}
+                        >
+                            Añadir
+                        </button>
+                    </footer>
                 </article>
             ) : isLoading ? (
                 <LoadingState />

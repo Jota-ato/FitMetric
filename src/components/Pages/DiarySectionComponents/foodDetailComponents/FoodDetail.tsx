@@ -146,6 +146,7 @@ export default function FoodDetail() {
                                     className="w-[40%] mx-auto bg-red-500 block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-red-600 hover:scale-105 transition-all duration-300"
                                     onClick={() => {
                                         removeFood(activeFood?.fdcId ?? 0, params.mealType as DiaryMealType)
+                                        setHasModal(false)
                                         navigate('/diary')
                                     }}
                                 >

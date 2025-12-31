@@ -21,6 +21,7 @@ export default function MealComponent({ mealLabel, mealType }: MealComponentProp
         setHasModal(true)
     }
 
+
     return (
         <article className="bg-surface p-8 rounded-xl border border-surface-">
             <header className="flex justify-between items-center border-b border-surface-gray-dark pb-4">

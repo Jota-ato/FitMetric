@@ -23,9 +23,9 @@ type diaryStoreType = {
         [key in DiaryMealType]: MacronutrientBreakdownInMeal
     }
     isFoodInMeal: (id: number, meal: DiaryMealType) => boolean
-    addFoodToMeal: (food: USDAFoodDetail, meal: DiaryMealType) => void
+    addFoodToMeal: (food: FoodInMeal, meal: DiaryMealType) => void
     editFoodInMeal: (food: FoodInMeal, meal: DiaryMealType) => void
-    updateMacrosInMealTime: (meal: DiaryMealType) => MacronutrientBreakdown
+    updateMacrosInMealTime: (meals: FoodInMeal[]) => MacronutrientBreakdown
     removeFoodFromMeal: (id: number, meal: DiaryMealType) => void
 }
 
@@ -54,24 +54,23 @@ export const diaryStore = create<diaryStoreType>()(
                     console.log(food)
                     const foodsInMealTime = get().meals[meal]
                     const newFoodsInMealTime = [...foodsInMealTime, food]
-                    const newMacros = get().updateMacrosInMealTime(meal)
+                    const newMacros = get().updateMacrosInMealTime(newFoodsInMealTime)
                     set({ meals: { ...get().meals, [meal]: newFoodsInMealTime }, macrosInMealTime: { ...get().macrosInMealTime, [meal]: newMacros } })
                 },
                 editFoodInMeal: (food, meal) => {
                     const foodsInMealTime = get().meals[meal]
                     const newFoodsInMealTime = foodsInMealTime.map(foodInMeal => foodInMeal.fdcId === food.fdcId ? food : foodInMeal)
-                    const newMacros = get().updateMacrosInMealTime(meal)
+                    const newMacros = get().updateMacrosInMealTime(newFoodsInMealTime)
                     set({ meals: { ...get().meals, [meal]: newFoodsInMealTime }, macrosInMealTime: { ...get().macrosInMealTime, [meal]: newMacros } })
                 },
                 removeFoodFromMeal: (id, meal) => {
                     const foodsInMealTime = get().meals[meal]
                     const newFoodsInMealTime = foodsInMealTime.filter(food => food.fdcId !== id)
-                    const newMacros = get().updateMacrosInMealTime(meal)
+                    const newMacros = get().updateMacrosInMealTime(newFoodsInMealTime)
                     set({ meals: { ...get().meals, [meal]: newFoodsInMealTime }, macrosInMealTime: { ...get().macrosInMealTime, [meal]: newMacros } })
                 },
-                updateMacrosInMealTime: (meal) => {
-                    const foodsInMealTime = get().meals[meal]
-                    const macrosSum = foodsInMealTime.reduce((acc, food) => {
+                updateMacrosInMealTime: (meals) => {
+                    const macrosSum = meals.reduce((acc, food) => {
                         const { protein, fat, carbohydrate, calories } = getNutrients(food)
                         return {
                             protein: acc.protein + protein,

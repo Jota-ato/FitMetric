@@ -3,6 +3,7 @@ import { useNavigate } from "react-router"
 import { usePageStore } from "../../../stores/PageStore"
 import type { DiaryMealType } from "../../../types/DiaryTypes"
 import { diaryStore } from "../../../stores/DiaryStore"
+import FoodInMealComponent from "./FoodInMealComponent"
 
 interface MealComponentProps {
     mealLabel: string
@@ -12,6 +13,7 @@ interface MealComponentProps {
 export default function MealComponent({ mealLabel, mealType }: MealComponentProps) {
 
     const meals = diaryStore(state => state.meals)
+    const { calories, protein, carbohydrate, fat } = diaryStore(state => state.macrosInMealTime[mealType])
     const setHasModal = usePageStore(state => state.setHasModal)
     const navigate = useNavigate()
     const handleMealClick = () => {
@@ -33,10 +35,10 @@ export default function MealComponent({ mealLabel, mealType }: MealComponentProp
             </header>
             <div className="flex flex-col gap-4 mt-4">
                 <MacrosGrid
-                    calories={0}
-                    protein={0}
-                    carbs={0}
-                    fats={0}
+                    calories={calories}
+                    protein={protein}
+                    carbs={carbohydrate}
+                    fats={fat}
                 />
             </div>
             <div>
@@ -44,10 +46,9 @@ export default function MealComponent({ mealLabel, mealType }: MealComponentProp
                     meals[mealType].length ?
                         <div className="space-y-4">
                             {meals[mealType].map(food => (
-                                <div key={food.fdcId} className="text-xl md:text-2xl text-center border border-surface-gray-dark p-4 rounded-xl">
-                                    <p>{food.description}</p>
-                                    <p>{food.portionSize}{food.portionUnit}</p>
-                                </div>
+                                <FoodInMealComponent
+                                    food={food}
+                                />
                             ))}
                         </div>
                         :

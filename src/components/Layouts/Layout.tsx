@@ -9,7 +9,6 @@ export default function Layout() {
     useTheme()
 
     const isBasic = usePageStore(state => state.isBasicInfoFull)
-    console.log(isBasic)
     const { pathname } = useLocation()
     const navigate = useNavigate()
     if (!isBasic && pathname !== '/') {

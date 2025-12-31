@@ -4,10 +4,14 @@ import FloatingThemeButton from "../FloatingThemeButton"
 import Footer from "./Footer"
 import { useTheme } from "../../hooks/useTheme"
 import { usePageStore } from "../../stores/PageStore"
+import { useState } from "react"
+import { useEffect } from "react"
+import MainScreen from "../MainScreen"
 
 export default function Layout() {
     useTheme()
 
+    const [starting, setStarting] = useState(true)
     const isBasic = usePageStore(state => state.isBasicInfoFull)
     const { pathname } = useLocation()
     const navigate = useNavigate()
@@ -15,14 +19,28 @@ export default function Layout() {
         navigate('/')
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setStarting(false)
+        }, 2000)
+    }, [])
+
     return (
         <>
-            <Nav />
-            <main className="min-h-screen">
-                <Outlet />
-            </main>
-            <FloatingThemeButton />
-            <Footer />
+            {
+                starting ? (
+                    <MainScreen />
+                ) : (
+                    <>
+                        <Nav />
+                        <main className="min-h-screen">
+                            <Outlet />
+                        </main>
+                        <FloatingThemeButton />
+                        <Footer />
+                    </>
+                )
+            }
         </>
     )
 }

@@ -2,9 +2,11 @@ import MealComponent from "./MealComponent"
 import { Outlet } from "react-router"
 import Modal from "../../Modal"
 import { usePageStore } from "../../../stores/PageStore"
+import { useNavigate } from "react-router"
 
 export default function DiaryComponent() {
 
+    const navigate = useNavigate()
     const hasModal = usePageStore(state => state.hasModal)
 
     return (
@@ -17,7 +19,11 @@ export default function DiaryComponent() {
                 <MealComponent mealLabel="Snack" mealType="Snack" />
             </div>
             {hasModal &&
-                <Modal>
+                <Modal
+                    customFunction={() => {
+                        navigate('/diary')
+                    }}
+                >
                     <Outlet />
                 </Modal>
             }

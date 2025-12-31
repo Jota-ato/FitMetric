@@ -20,6 +20,7 @@ export default function FoodDetail() {
 
     // Estado para la porción personalizada
     const addFood = diaryStore(state => state.addFoodToMeal)
+    const isFoodInMeal = diaryStore(state => state.isFoodInMeal(activeFood?.fdcId ?? 0, params.mealType as DiaryMealType))
     const [portionSize, setPortionSize] = useState<number>(100)
     const [portionUnit, setPortionUnit] = useState<string>("g")
 
@@ -36,7 +37,10 @@ export default function FoodDetail() {
             portionSize,
             portionUnit,
         }
-        addFood(newMeal, params.mealType as DiaryMealType)
+        if (!isFoodInMeal) {
+            addFood(newMeal, params.mealType as DiaryMealType)
+        }
+
         navigate(-2)
         setHasModal(false)
     }
@@ -108,7 +112,7 @@ export default function FoodDetail() {
                             className="w-full max-w-220 mx-auto bg-primary block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-primary-hover hover:scale-105 transition-all duration-300"
                             onClick={handleAddFood}
                         >
-                            Añadir
+                            {isFoodInMeal ? "Editar" : "Añadir"}
                         </button>
                     </footer>
                 </article>

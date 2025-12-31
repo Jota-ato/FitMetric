@@ -1,13 +1,14 @@
 // src/components/InputContainter.tsx
 import { forwardRef } from "react"
-import type { RegistrationInputType } from "../types"
+import type { RegistrationInputType } from "../../../types"
 
 interface InputProps extends RegistrationInputType {
-    error?: string // Añadimos soporte para mostrar errores
+    error?: string
+    defaultValue?: string
 }
 
 const InputContainter = forwardRef<HTMLInputElement, InputProps>(
-    ({ label, name, placeholder, type = "text", error, ...rest }, ref) => {
+    ({ label, name, placeholder, type = "text", error, defaultValue, ...rest }, ref) => {
         return (
             <div className="space-y-4">
                 <label htmlFor={name} className="block text-2xl font-semibold">{label}</label>
@@ -20,6 +21,7 @@ const InputContainter = forwardRef<HTMLInputElement, InputProps>(
                     className={`text-2xl transition-colors duration-300 block border-b focus:outline-none bg-transparent w-full ${error ? "border-red-500" : "border-text-main"
                         }`}
                     type={type}
+                    defaultValue={defaultValue}
                 />
                 {error && <p className="text-red-500 text-xl mt-1">{error}</p>}
             </div>

@@ -1,10 +1,10 @@
 // src/components/RegistationForm.tsx
 import { useForm, type SubmitHandler } from "react-hook-form"
-import { usePatientStore } from "../stores/PatientStore"
-import type { GenderType, RegistrationFields } from "../types"
+import { usePatientStore } from "../../../stores/PatientStore"
+import type { GenderType, RegistrationFields } from "../../../types"
 import InputContainter from "./InputContainter"
 import FormContainer from "./FormContainer"
-import { usePageStore } from "../stores/PageStore"
+import { usePageStore } from "../../../stores/PageStore"
 import { useLocation, useNavigate } from "react-router"
 
 
@@ -12,25 +12,24 @@ export default function RegistationForm() {
     const { pathname } = useLocation()
     const navigate = useNavigate()
     const setPatientData = usePatientStore(state => state.setPatientData)
-    const { name, weight, height, age, sex } = usePatientStore()
+    const { name: nameFromPatient, weight: weightFromPatient, height: heightFromPatient, age: ageFromPatient, sex: sexFromPatient } = usePatientStore()
     const setStep = usePageStore(state => state.setStep)
     const setIsFullBasicInfo = usePageStore(state => state.setIsFullBasicInfo)
 
-    // 1. Añadimos defaultValues para que el select no inicie en un estado inválido "selected"
     const { register, handleSubmit, formState: { errors } } = useForm<RegistrationFields>({
         defaultValues: {
-            name,
-            weight,
-            height,
-            age,
-            sex: sex || "" as GenderType // Iniciamos vacío para forzar la validación
+            name: nameFromPatient === undefined ? "" : nameFromPatient,
+            weight: weightFromPatient === 0 ? undefined : weightFromPatient,
+            height: heightFromPatient === 0 ? undefined : heightFromPatient,
+            age: ageFromPatient === 0 ? undefined : ageFromPatient,
+            sex: sexFromPatient === undefined ? "" as GenderType : sexFromPatient
         }
     })
 
     const onSubmit: SubmitHandler<RegistrationFields> = (data) => {
-        // Al usar valueAsNumber en el register, data ya trae números
-        setPatientData(data)
-        if (name && (weight > 0) && (height > 0) && (age > 0) && sex) {
+        const { name, age, height, sex, weight } = data
+        if (name && (age > 0) && (height > 0) && (weight > 0) && sex) {
+            setPatientData(data)
             setIsFullBasicInfo({ name, weight, height, age, sex })
             if (pathname === "/profile/edit-basic-info") {
                 navigate('/profile')
@@ -94,15 +93,15 @@ export default function RegistationForm() {
                         <label htmlFor="sex" className="block text-2xl font-semibold">Género</label>
                         <select
                             id="sex"
-                            className={`text-2xl block border-b focus:outline-none w-full focus:bg-surface ${errors.sex ? "border-red-500" : "border-text-main"
+                            className={`text-2xl  block border-b focus:outline-none w-full focus:bg-surface ${errors.sex ? "border-red-500" : "border-text-main"
                                 }`}
+                            defaultValue={"Selecciona tu género"}
                             {...register("sex", { required: "Selecciona un género" })}
                         >
-                            <option value="" defaultValue={"Selecciona tu género"} disabled>Selecciona tu género</option>
+                            <option disabled>Selecciona tu género</option>
                             <option value="Male">Masculino</option>
                             <option value="Female">Femenino</option>
                         </select>
-                        {/* 4. IMPORTANTE: Mostrar error del select */}
                         {errors.sex && <p className="text-red-500 text-xl mt-1">{errors.sex.message}</p>}
                     </div>
 

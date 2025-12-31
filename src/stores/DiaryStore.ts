@@ -18,7 +18,9 @@ type diaryStoreType = {
     macrosInMealTime: {
         [key in DiaryMealType]: MacronutrientBreakdown
     }
+    isFoodInMeal: (id: number, meal: DiaryMealType) => boolean
     addFoodToMeal: (food: USDAFoodDetail, meal: DiaryMealType) => void
+    editFoodInMeal: (food: FoodInMeal, meal: DiaryMealType) => void
     updateMacrosInMealTime: (meal: DiaryMealType) => void
 }
 
@@ -39,9 +41,18 @@ export const diaryStore = create<diaryStoreType>()(
                     Dinner: { protein: 0, fat: 0, carbohydrate: 0, calories: 0 },
                     Snack: { protein: 0, fat: 0, carbohydrate: 0, calories: 0 }
                 },
+                isFoodInMeal: (id, meal) => {
+                    const foodsInMealTime = get().meals[meal]
+                    return foodsInMealTime.some(food => food.fdcId === id)
+                },
                 addFoodToMeal: (food, meal) => {
                     const foodsInMealTime = get().meals[meal]
                     const newFoodsInMealTime = [...foodsInMealTime, food]
+                    set({ meals: { ...get().meals, [meal]: newFoodsInMealTime } })
+                },
+                editFoodInMeal: (food, meal) => {
+                    const foodsInMealTime = get().meals[meal]
+                    const newFoodsInMealTime = foodsInMealTime.map(foodInMeal => foodInMeal.fdcId === food.fdcId ? food : foodInMeal)
                     set({ meals: { ...get().meals, [meal]: newFoodsInMealTime } })
                 },
                 updateMacrosInMealTime: (meal) => {

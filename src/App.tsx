@@ -1,9 +1,9 @@
 import MainScreen from "./components/MainScreen"
 import FloatingThemeButton from "./components/FloatingThemeButton"
 import { useEffect, useState } from "react"
-import RegistationForm from "./components/RegistationForm"
+import RegistationForm from "./components/Pages/RegistrationPageComponents/RegistationForm"
 import { usePageStore } from "./stores/PageStore"
-import DetailInformationForm from "./components/DetailInformationForm"
+import DetailInformationForm from "./components/Pages/RegistrationPageComponents/DetailInformationForm"
 import { useTheme } from "./hooks/useTheme"
 import { useNavigate } from "react-router"
 

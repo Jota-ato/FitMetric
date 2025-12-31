@@ -1,13 +1,11 @@
 
-import CenterContainer from "./CenterContainer";
-
 export default function MainScreen() {
     /**
      * Main screen to show logo and brand name
      */
 
     return (
-        <CenterContainer>
+        <section className="flex justify-center items-center h-screen w-screen">
             <div className="flex flex-col items-center gap-6 animate-fade-in">
                 {/* Logo */}
                 <div className="relative group">
@@ -28,6 +26,6 @@ export default function MainScreen() {
                     Track. Measure. Transform.
                 </p>
             </div>
-        </CenterContainer>
+        </section>
     )
 }

@@ -38,10 +38,10 @@ export const usePatientStore = create<PatientState>()(
             BMR: 0,
             TDEE: 0,
             caloriesNeeded: 0,
-            sex: "Male",
-            activityFactor: "Sedentary",
-            goal: "Maintain Weight",
-            purpose: "Gain Muscle",
+            sex: "" as GenderType,
+            activityFactor: "" as ActivityFactorType,
+            goal: "" as GoalType,
+            purpose: "" as PurposeType,
             macros: {
                 protein: 0,
                 carbohydrate: 0,
@@ -55,6 +55,10 @@ export const usePatientStore = create<PatientState>()(
                  */
                 const keys = Object.keys(data)
                 if (keys.length === 1 && keys[0] === 'name') {
+                    set(data)
+                    return
+                }
+                if (!keys.includes("activityFactor")) {
                     set(data)
                     return
                 }

@@ -1,8 +1,8 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
-import { usePatientStore } from "../stores/PatientStore"
-import type { GoalType, PurposeType, ActivityFactorType } from "../types"
+import { usePatientStore } from "../../../stores/PatientStore"
+import type { GoalType, PurposeType, ActivityFactorType } from "../../../types"
 import FormContainer from "./FormContainer"
-import { usePageStore } from "../stores/PageStore"
+import { usePageStore } from "../../../stores/PageStore"
 import { useLocation, useNavigate } from "react-router"
 
 type DetailInformationInputsType = {

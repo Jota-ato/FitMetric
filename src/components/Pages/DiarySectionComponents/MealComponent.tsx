@@ -51,12 +51,12 @@ export default function MealComponent({ mealLabel, mealType }: MealComponentProp
                     No hay alimentos registrados
                 </p> :
                 isOpen ? (
-                    <ChevronDown
+                    <ChevronUp
                         className="mx-auto cursor-pointer"
                         onClick={() => setIsOpen(!isOpen)}
                     />
                 ) : (
-                    <ChevronUp
+                    <ChevronDown
                         className="mx-auto cursor-pointer"
                         onClick={() => setIsOpen(!isOpen)}
                     />

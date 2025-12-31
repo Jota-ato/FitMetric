@@ -101,7 +101,7 @@ export default function FoodDetail() {
             editFood(newMeal, params.mealType as DiaryMealType)
         }
         setHasModal(false)
-        navigate(-2) // Regresa al diario cerrando el modal/pantalla
+        navigate('/diary') // Regresa al diario cerrando el modal/pantalla
     }
 
     // 6. RENDER
@@ -139,6 +139,7 @@ export default function FoodDetail() {
                                 <button
                                     className="w-[40%] mx-auto bg-primary block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-primary-hover hover:scale-105 transition-all duration-300"
                                     onClick={handleAddFood}
+
                                 >
                                     Editar
                                 </button>

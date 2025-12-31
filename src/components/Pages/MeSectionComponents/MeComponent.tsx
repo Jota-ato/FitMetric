@@ -5,16 +5,7 @@ import DataCard from "./DataCard"
 
 export default function MeComponent() {
 
-    const name = usePatientStore(state => state.name)
-    const weight = usePatientStore(state => state.weight)
-    const height = usePatientStore(state => state.height)
-    const age = usePatientStore(state => state.age)
-    const sex = usePatientStore(state => state.sex)
-    const BMR = usePatientStore(state => state.BMR)
-    const TDEE = usePatientStore(state => state.TDEE)
-    const caloriesNeeded = usePatientStore(state => state.caloriesNeeded)
-    const goal = usePatientStore(state => state.goal)
-    const purpose = usePatientStore(state => state.purpose)
+    const { basicInfo: { name, weight, height, age, sex }, advancedInfo: { goal, purpose }, BMR, TDEE, caloriesNeeded } = usePatientStore()
     const navigate = useNavigate()
 
     return (

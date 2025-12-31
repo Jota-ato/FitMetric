@@ -12,7 +12,7 @@ export default function RegistationForm() {
     const { pathname } = useLocation()
     const navigate = useNavigate()
     const setPatientData = usePatientStore(state => state.setPatientData)
-    const { name: nameFromPatient, weight: weightFromPatient, height: heightFromPatient, age: ageFromPatient, sex: sexFromPatient } = usePatientStore()
+    const { basicInfo: { name: nameFromPatient, weight: weightFromPatient, height: heightFromPatient, age: ageFromPatient, sex: sexFromPatient } } = usePatientStore()
     const setStep = usePageStore(state => state.setStep)
     const setIsFullBasicInfo = usePageStore(state => state.setIsFullBasicInfo)
 
@@ -29,7 +29,7 @@ export default function RegistationForm() {
     const onSubmit: SubmitHandler<RegistrationFields> = (data) => {
         const { name, age, height, sex, weight } = data
         if (name && (age > 0) && (height > 0) && (weight > 0) && sex) {
-            setPatientData(data)
+            setPatientData({ basicInfo: data })
             setIsFullBasicInfo({ name, weight, height, age, sex })
             if (pathname === "/profile/edit-basic-info") {
                 navigate('/profile')

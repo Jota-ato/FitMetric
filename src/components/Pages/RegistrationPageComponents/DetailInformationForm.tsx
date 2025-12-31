@@ -16,7 +16,7 @@ export default function DetailInformationForm() {
     const setStep = usePageStore(state => state.setStep)
     const { pathname } = useLocation()
     const navigate = useNavigate()
-    const { goal, purpose, activityFactor } = usePatientStore()
+    const { advancedInfo: { goal, purpose, activityFactor } } = usePatientStore()
 
     // 1. Añadimos defaultValues para que el select no inicie en un estado inválido "selected"
     const { register, handleSubmit, formState: { errors } } = useForm<DetailInformationInputsType>({
@@ -28,7 +28,7 @@ export default function DetailInformationForm() {
     })
 
     const onSubmit: SubmitHandler<DetailInformationInputsType> = (data) => {
-        setPatientData(data)
+        setPatientData({ advancedInfo: data })
         if (pathname === "/profile/edit-detail-info") {
             navigate('/profile')
         } else {

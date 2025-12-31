@@ -49,6 +49,7 @@ export default function MealComponent({ mealLabel, mealType }: MealComponentProp
                             {meals[mealType].map(food => (
                                 <FoodInMealComponent
                                     food={food}
+                                    meal={mealType}
                                 />
                             ))}
                         </div>

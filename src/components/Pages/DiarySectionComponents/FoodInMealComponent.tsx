@@ -1,18 +1,32 @@
 
 import { getNutrients } from "../../../helpers"
 import type { FoodInMeal } from "../../../stores/DiaryStore"
+import { useNavigate } from "react-router"
+import { usePageStore } from "../../../stores/PageStore"
+import type { DiaryMealType } from "../../../types/DiaryTypes"
 
 interface FoodInMealComponentProps {
     food: FoodInMeal
+    meal: DiaryMealType
 }
 
-export default function FoodInMealComponent({ food }: FoodInMealComponentProps) {
+export default function FoodInMealComponent({ food, meal }: FoodInMealComponentProps) {
 
     const { calories, carbohydrate, fat, protein } = getNutrients(food)
+    const navigate = useNavigate()
+    const setHasModal = usePageStore(state => state.setHasModal)
+
+    const handleClickToEdith = () => {
+        navigate(`/diary/${meal}/foodDetail/${food.fdcId}`)
+        setHasModal(true)
+    }
 
     return (
-        <article className="w-full max-w-220 mx-auto p-4 border border-surface-gray-dark rounded-xl space-y-4">
-            <div className="flex justify-between border-b pb-4 border-surface-gray-dark">
+        <article className="w-full max-w-220 mx-auto p-4 border border-surface-gray-dark rounded-xl space-y-4 hover:scale-105 hover:border-primary tansition-all duration-300">
+            <div
+                className="flex justify-between gap-8 border-b pb-4 border-surface-gray-dark cursor-pointer"
+                onClick={handleClickToEdith}
+            >
                 <div className="text-xl md:text-2xl">
                     <p className="font-bold">{food.description}</p>
                     <p className="text-secondary font-light">{food.portionSize}{food.portionUnit}</p>

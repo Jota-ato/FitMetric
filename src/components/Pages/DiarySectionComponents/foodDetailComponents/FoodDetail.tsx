@@ -137,16 +137,16 @@ export default function FoodDetail() {
                         {isFoodInMeal ? (
                             <div className="flex flex-col md:flex-row gap-4">
                                 <button
-                                    className="w-full max-w-220 mx-auto bg-primary block rounded-lg     py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-primary-hover hover:scale-105 transition-all duration-300"
+                                    className="w-[40%] mx-auto bg-primary block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-primary-hover hover:scale-105 transition-all duration-300"
                                     onClick={handleAddFood}
                                 >
                                     Editar
                                 </button>
                                 <button
-                                    className="w-full max-w-220 mx-auto bg-primary block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-primary-hover hover:scale-105 transition-all duration-300 "
+                                    className="w-[40%] mx-auto bg-red-500 block rounded-lg py-4 text-center text-white font-bold text-xl md:text-2xl cursor-pointer hover:bg-red-600 hover:scale-105 transition-all duration-300"
                                     onClick={() => {
                                         removeFood(activeFood?.fdcId ?? 0, params.mealType as DiaryMealType)
-                                        navigate(-2)
+                                        navigate('/diary')
                                     }}
                                 >
                                     Eliminar
